@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti - Henry</title>
+    <link rel="stylesheet" href="css/styleshome.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-theme">
+    <div id="particles-js"></div>
+    <header>
+        <h1>Henry G.</h1>
+        <nav class="navbar">
+            <div class="menu-header">
+                <button id="menu-toggle" class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <span id="current-page"></span>
+            </div>
+            <ul class="menu">
+                <li><a href="index.html" data-page="Home">Home</a></li>
+                <li><a href="about.html" data-page="Chi Sono">Chi Sono</a></li>
+                <li><a href="projects.html" data-page="Progetti">Progetti</a></li>
+                <li><a href="contact.html" data-page="Contatti">Contatti</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="contact">
+            <h2>Contattami</h2>
+            <p>Hai domande, proposte di collaborazione o semplicemente vuoi salutarmi? Sono sempre felice di sentire nuove idee e connettermi con persone interessate alla tecnologia e allo sviluppo web.</p>
+            
+            <h3>Dove trovarmi</h3>
+            <ul>
+                <li>Email: <a href="mailto:henry8913@hotmail.it">henry8913@hotmail.it</a></li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/henry-k-grecchi-555454254/" target="_blank">Henry G.</a></li>
+                <li>GitHub: <a href="https://github.com/henry8913" target="_blank">henry8913</a></li>
+            </ul>
+            
+            <h3>Oppure inviami un messaggio</h3>
+            <form action="#" method="post">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="La tua email" required>
+                
+                <label for="message">Messaggio:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Scrivi il tuo messaggio qui" required></textarea>
+                
+                <button type="submit" class="btn">Invia</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Henry - Full-Stack Developer</p>
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</body>
+</html>
+
