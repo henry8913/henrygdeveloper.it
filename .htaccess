@@ -1,0 +1,10 @@
+# Abilita il motore di riscrittura
+RewriteEngine On
+
+# Reindirizza tutto il traffico HTTP a HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Reindirizza www.henrygdeveloper.com a henrygdeveloper.com
+RewriteCond %{HTTP_HOST} ^www\.henrygdeveloper\.com [NC]
+RewriteRule ^(.*)$ https://henrygdeveloper.com/$1 [L,R=301]
