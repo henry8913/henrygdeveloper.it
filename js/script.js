@@ -96,8 +96,8 @@ const textsToType = [
     { id: "skills-version-control", text: "Version Control: Git & GitHub" }
 ];
 
-const typingSpeed = 125; // Velocità di digitazione in millisecondi
-const deletingSpeed = 100; // Velocità di cancellazione
+const typingSpeed = 100; // Velocità di digitazione in millisecondi
+const deletingSpeed = 50; // Velocità di cancellazione
 const delayBetweenTexts = 500; // Ritardo tra un testo e il successivo
 let currentTextIndex = 0; // Testo attualmente in scrittura
 let isCorrecting = false; // Flag per controllare la correzione
