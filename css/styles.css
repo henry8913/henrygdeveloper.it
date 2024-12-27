@@ -212,16 +212,27 @@ header {
     }
 }
 
+.btn {
+    color: #aaaaaa;
+}
 
 /* Footer Sempre in Fondo */
 footer {
     /*position: fixed;*/
     bottom: 0;
     width: 100%;
-    background-color: #ffffff;
-    color: #ffa500;
+    background-color: #292929;
     text-align: center;
     padding: 0.5rem 0;
+}
+
+footer li {
+    color: #aaaaaa;
+}
+
+footer h4 {
+    color: #ffa500;
+    margin-bottom: 2rem;
 }
 
 /* Sezioni */

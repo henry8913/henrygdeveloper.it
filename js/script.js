@@ -241,3 +241,31 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+
+    // Invia i dati a Formspree
+    fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('error-message').style.display = 'none';
+            form.reset(); // Resetta il modulo
+        } else {
+            document.getElementById('success-message').style.display = 'none';
+            document.getElementById('error-message').style.display = 'block';
+        }
+    })
+    .catch(() => {
+        document.getElementById('success-message').style.display = 'none';
+        document.getElementById('error-message').style.display = 'block';
+    });
+});
+
+

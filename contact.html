@@ -41,7 +41,7 @@
             </ul>
             
             <h3>Oppure inviami un messaggio</h3>
-            <form action="#" method="post">
+            <form id="contact-form" action="https://formspree.io/f/mpwwpgzr" method="POST">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
                 
@@ -53,7 +53,9 @@
                 
                 <button type="submit" class="btn">Invia</button>
             </form>
-        </section>
+            <p id="success-message" style="display: none; color: green;">Messaggio inviato con successo! Ti risponderò al più presto.</p>
+            <p id="error-message" style="display: none; color: red;">Si è verificato un errore. Riprova più tardi.</p>
+            
     </main>
     <footer>
         <p>© 2024 Henry - Full-Stack Developer</p>
