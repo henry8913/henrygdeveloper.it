@@ -12,7 +12,7 @@
 **Mi chiamo Henry e sono un Full-Stack Developer** con una profonda passione per il mondo del coding e le tecnologie emergenti. 
 La mia missione è creare soluzioni digitali che abbiano un impatto reale, combinando design e funzionalità in modo armonioso.
 
-[Vai al Sito »](henrygdeveloper.com)
+[Vai al Sito »](https://henrygdeveloper.com/)
 
 ## Contributing
 
