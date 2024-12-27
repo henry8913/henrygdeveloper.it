@@ -47,7 +47,7 @@ header h1 {
 }
 
 header img {
-    height: 5.5rem;
+    height: 3.8rem;
 }
 
 /* Tema Scuro */
@@ -75,7 +75,7 @@ header {
     flex-direction: column;
     align-items: start;
     background-color: #1e1e1e;
-    padding: 0.75rem 0;
+    padding: 1rem 0;
     transition: max-height 0.3s ease; /* Transizione fluida */
     overflow: hidden; /* Evita sovrapposizioni */
     max-height: 60px; /* Altezza normale */
