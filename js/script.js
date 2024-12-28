@@ -7,17 +7,15 @@ if (menuToggle && navbar) {
     menuToggle.addEventListener('click', () => {
         navbar.classList.toggle('active');
 
-        // Modifica dinamicamente l'altezza dell'header
+        // Modifica dinamicamente l'altezza dell'Altezza dinamica
         if (navbar.classList.contains('active')) {
             const navbarHeight = navbar.scrollHeight;
-            header.style.height = `${navbarHeight + 20}px`; // Altezza dinamica
+            header.style.height = `${navbarHeight + 120}px`; // Altezza dinamica
         } else {
             header.style.height = 'auto'; // Torna alla dimensione originale
         }
     });
 }
-
-
 
 // Identifica la pagina corrente
 const currentPageSpan = document.getElementById('current-page');
@@ -179,9 +177,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-
-
-
 // Avvia l'effetto di scrittura quando la pagina viene caricata
 window.addEventListener("DOMContentLoaded", () => {
     typeEffectSequential();
@@ -267,5 +262,3 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
         document.getElementById('error-message').style.display = 'block';
     });
 });
-
-
