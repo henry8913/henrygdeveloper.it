@@ -23,7 +23,8 @@ const pageTitles = {
     'index.html': 'Home',
     'about.html': 'Chi Sono',
     'projects.html': 'Progetti',
-    'contact.html': 'Contatti'
+    'contact.html': 'Contatti',
+    'certificates.html': 'Certificazioni'
 };
 
 if (currentPageSpan) {
@@ -260,5 +261,15 @@ document.getElementById('contact-form').addEventListener('submit', function (e) 
     .catch(() => {
         document.getElementById('success-message').style.display = 'none';
         document.getElementById('error-message').style.display = 'block';
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".certification-card");
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = 1;
+            card.style.transform = "translateY(0)";
+        }, index * 200);
     });
 });
