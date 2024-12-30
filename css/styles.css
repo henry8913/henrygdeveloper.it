@@ -186,7 +186,13 @@ header {
 /*________________________________________________________________________________________________________*/
 
 /* Responsive */
-@media (min-width: 768px) {
+@media (min-width: 35.5cm) {
+    html {
+        font-size: larger;
+    };
+}
+
+@media (min-width: 880px) {
     .menu-header {
         display: none;
     }
@@ -220,7 +226,25 @@ header {
     .menu li a:hover {
         color: #ffffff; /* Cambia colore al passaggio del mouse */
     }
+
 }
+
+/* Responsive Styles */
+@media (max-width: 880px) {
+    section {
+        padding: 0.1rem;
+    }
+
+    h2, h3 {
+        font-size: 1.5rem;
+    }
+
+    p, ul li {
+        font-size: 0.9rem;
+    }
+}
+
+/*________________________________________________________________________________________________________*/
 
 .btn {
     color: #aaaaaa;
@@ -538,21 +562,6 @@ form button {
 form button:hover {
     background-color: #ff7f00;
     color: #ffffff;
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-    section {
-        padding: 0.5rem;
-    }
-
-    h2, h3 {
-        font-size: 1.5rem;
-    }
-
-    p, ul li {
-        font-size: 0.9rem;
-    }
 }
 
 /*________________________________________________________________________________________________________*/
