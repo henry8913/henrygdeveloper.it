@@ -85,11 +85,11 @@ const textsToType = [
         }
     },
     { id: "typing-paragraph-2", text: "Sono Henry, un Full-Stack Developer appassionato di costruire esperienze web moderne, performanti e coinvolgenti." },
-    { id: "typing-paragraph-3", text: "Ho lavorato su una varietà di progetti, dal design di interfacce utente eleganti allo sviluppo di sistemi backend scalabili." },
+    { id: "typing-paragraph-3", text: "Ho lavorato su una varietà di progetti, combinando design creativo e sviluppo tecnico, per costruire soluzioni web intuitive e sistemi backend robusti e scalabili." },
 
     // Sezione skills
     { id: "skills-title", text: "Le mie competenze" },
-    { id: "skills-intro", text: "Sono esperto in:" },
+    { id: "skills-intro", text: "Ho maturato esperienza in:" },
     { id: "skills-frontend", text: "Frontend: HTML, CSS, JavaScript, React" },
     { id: "skills-backend", text: "Backend: Node.js, Express, MongoDB" },
     { id: "skills-version-control", text: "Version Control: Git & GitHub" }
