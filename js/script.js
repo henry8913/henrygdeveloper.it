@@ -162,9 +162,23 @@ function typeEffectSequential() {
     }
 }
 
-// Avvia l'effetto di scrittura quando la pagina viene caricata
+// Controllo e avvio dell'animazione
 window.addEventListener("DOMContentLoaded", () => {
-    typeEffectSequential();
+    const animationKey = "textAnimationPlayed";
+
+    if (!localStorage.getItem(animationKey)) {
+        // Avvia l'animazione e salva lo stato nel localStorage
+        typeEffectSequential();
+        localStorage.setItem(animationKey, "true");
+    } else {
+        // Mostra direttamente il testo finale
+        textsToType.forEach(({ id, text }) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = text;
+            }
+        });
+    }
 });
 
 // Aggiungi animazione per il cursore lampeggiante tramite CSS
@@ -178,64 +192,61 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Avvia l'effetto di scrittura quando la pagina viene caricata
-window.addEventListener("DOMContentLoaded", () => {
-    typeEffectSequential();
 
-    // Configurazione di Particles.js
-    particlesJS('particles-js', {
-        particles: {
-            number: {
-                value: 50, // Numero di particelle
-                density: { enable: true, value_area: 800 } // Densità
-            },
-            color: { value: '#ffffff' }, // Colore delle particelle
-            shape: {
-                type: 'circle', // Forma
-                stroke: { width: 0, color: '#000000' }
-            },
-            opacity: {
-                value: 0.5, // Opacità
-                random: false,
-                anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
-            },
-            size: {
-                value: 3, // Dimensione
-                random: true,
-                anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
-            },
-            line_linked: {
-                enable: true,
-                distance: 150, // Distanza massima
-                color: '#FFD700', // Linee gialle
-                opacity: 0.6,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 6, // Velocità
-                direction: 'none',
-                random: false,
-                straight: false,
-                out_mode: 'out',
-                bounce: false
-            }
+// Configurazione di Particles.js
+particlesJS('particles-js', {
+    particles: {
+        number: {
+            value: 50, // Numero di particelle
+            density: { enable: true, value_area: 800 } // Densità
         },
-        interactivity: {
-            detect_on: 'canvas',
-            events: {
-                onhover: { enable: true, mode: 'repulse' }, // Interazione con il mouse
-                onclick: { enable: true, mode: 'push' }, // Click aggiunge particelle
-                resize: true
-            },
-            modes: {
-                repulse: { distance: 100, duration: 0.4 },
-                push: { particles_nb: 4 }
-            }
+        color: { value: '#ffffff' }, // Colore delle particelle
+        shape: {
+            type: 'circle', // Forma
+            stroke: { width: 0, color: '#000000' }
         },
-        retina_detect: true // Supporto Retina
-    });
+        opacity: {
+            value: 0.5, // Opacità
+            random: false,
+            anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+        },
+        size: {
+            value: 3, // Dimensione
+            random: true,
+            anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+        },
+        line_linked: {
+            enable: true,
+            distance: 150, // Distanza massima
+            color: '#FFD700', // Linee gialle
+            opacity: 0.6,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 6, // Velocità
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: { enable: true, mode: 'repulse' }, // Interazione con il mouse
+            onclick: { enable: true, mode: 'push' }, // Click aggiunge particelle
+            resize: true
+        },
+        modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 }
+        }
+    },
+    retina_detect: true // Supporto Retina
 });
+
 
 document.getElementById('contact-form').addEventListener('submit', function (e) {
     e.preventDefault();
