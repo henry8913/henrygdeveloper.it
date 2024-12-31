@@ -30,10 +30,10 @@ La mia missione è creare soluzioni digitali che abbiano un impatto reale, unend
 ## 🖼️ Screenshots
 
 ### Homepage
-![Homepage](https://henrygdeveloper.com/index.html)
+![Homepage](https://henrygdeveloper.com/index.html/)
 
 ### Sezione Progetti
-![Progetti](https://henrygdeveloper.com/projects.html)
+![Progetti](https://henrygdeveloper.com/projects.html/)
 
 ---
 
