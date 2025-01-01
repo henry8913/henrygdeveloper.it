@@ -466,12 +466,16 @@ section {
     padding: 1rem;
     text-align: left;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; /* Evita traboccamenti */
 }
 
 .project-list article h3 {
     color: #ffa500;
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Leggermente ridotto */
     margin-bottom: 0.5rem;
+    word-wrap: break-word; /* Forza la parola a spezzarsi */
+    overflow: hidden; /* Nasconde parti traboccanti */
+    text-overflow: ellipsis; /* Aggiunge i puntini se necessario */
 }
 
 .project-list article p {
