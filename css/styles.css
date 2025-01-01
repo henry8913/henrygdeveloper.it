@@ -188,8 +188,16 @@ header {
 /* Responsive */
 @media (min-width: 35.5cm) {
     html {
-        font-size: larger;
-    };
+        font-size: x-large;
+    }
+    header .menu li a {
+    font-size: x-large;
+    }
+
+    section {
+        max-width: 75%;
+    }
+
 }
 
 @media (min-width: 880px) {
@@ -227,6 +235,9 @@ header {
         color: #ffffff; /* Cambia colore al passaggio del mouse */
     }
 
+    section {
+        max-width: 75%;
+    }
 }
 
 /* Responsive Styles */
@@ -242,6 +253,11 @@ header {
     p, ul li {
         font-size: 0.9rem;
     }
+
+    main {
+        margin: 1rem;
+    }
+
 }
 
 /*________________________________________________________________________________________________________*/
@@ -283,7 +299,6 @@ footer h4 {
 section {
     margin: 2rem auto;
     padding: 1rem;
-    max-width: 800px;
     text-align: center;
 }
 
