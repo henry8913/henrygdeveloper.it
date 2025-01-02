@@ -87,9 +87,9 @@ const observer = new IntersectionObserver((entries, observer) => {
         if (entry.isIntersecting) {
             const animationKey = "textAnimationPlayed";
 
-            if (!localStorage.getItem(animationKey)) {
+            if (!sessionStorage.getItem(animationKey)) { // Usa sessionStorage
                 typeEffectSequential();
-                localStorage.setItem(animationKey, "true");
+                sessionStorage.setItem(animationKey, "true");
             } else {
                 textsToType.forEach(({ id, text }) => {
                     const element = document.getElementById(id);
