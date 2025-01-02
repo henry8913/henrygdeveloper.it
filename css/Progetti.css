@@ -1,0 +1,63 @@
+/*______________________ Progetti ______________________*/
+
+.projects {
+    margin-top: 3rem;
+}
+
+.projects h2 {
+    font-size: 2rem;
+    color: #ffa500;
+    margin-bottom: 1.5rem;
+}
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.project-list article {
+    background-color: #1e1e1e;
+    border: 1px solid #ffa500;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: left;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden; /* Evita traboccamenti */
+}
+
+.project-list article h3 {
+    color: #ffa500;
+    font-size: 1.4rem; /* Leggermente ridotto */
+    margin-bottom: 0.5rem;
+    word-wrap: break-word; /* Forza la parola a spezzarsi */
+    overflow: hidden; /* Nasconde parti traboccanti */
+    text-overflow: ellipsis; /* Aggiunge i puntini se necessario */
+}
+
+.project-list article p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.project-list article a {
+    display: inline-block;
+    color: #121212;
+    background-color: #ffa500;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.project-list article a:hover {
+    background-color: #ff7f00;
+    color: #ffffff;
+}
+
+.project-list article:hover {
+    transform: translateY(-5px);
+    background-color: #292929;
+}

@@ -1,0 +1,75 @@
+/*______________________ Responsiveness ______________________*/
+
+@media (min-width: 35.5cm) {
+    html {
+        font-size: x-large;
+    }
+    header .menu li a {
+    font-size: x-large;
+    }
+
+    section {
+        max-width: 75%;
+    }
+
+}
+
+@media (min-width: 880px) {
+    .menu-header {
+        display: none;
+    }
+
+    .menu {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        justify-content: center; /* Allinea gli elementi al centro */
+        align-items: center; /* Centra verticalmente gli elementi */
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        opacity: 1;
+        visibility: visible;
+        width: 100%; /* Assicura che il menu occupi tutta la larghezza disponibile */
+    }
+
+    .menu li {
+        margin: 0 1rem; /* Spaziatura orizzontale tra gli elementi */
+        list-style: none; /* Rimuove i punti elenco */
+    }
+
+    .menu li a {
+        text-decoration: none; /* Rimuove la sottolineatura dei link */
+        color: #ffa500; /* Colore dei link */
+        font-size: 1.2rem; /* Dimensione del font */
+        font-weight: bold;
+    }
+
+    .menu li a:hover {
+        color: #ffffff; /* Cambia colore al passaggio del mouse */
+    }
+
+    section {
+        max-width: 75%;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 880px) {
+    section {
+        padding: 0.1rem;
+    }
+
+    h2, h3 {
+        font-size: 1.5rem;
+    }
+
+    p, ul li {
+        font-size: 0.9rem;
+    }
+
+    main {
+        margin: 1rem;
+    }
+
+}

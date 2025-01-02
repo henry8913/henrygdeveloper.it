@@ -1,0 +1,84 @@
+/*______________________ Contatti ______________________*/
+
+.contact h2 {
+    font-size: 2rem;
+    color: #ffa500;
+    margin-bottom: 1rem;
+}
+
+.contact p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contact h3 {
+    font-size: 1.5rem;
+    color: #ffa500;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.contact ul li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.contact ul li a {
+    color: #ffa500;
+    text-decoration: none;
+}
+
+.contact ul li a:hover {
+    text-decoration: underline;
+}
+
+form {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+form label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ffa500;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+form input::placeholder, form textarea::placeholder {
+    color: #aaaaaa;
+}
+
+form button {
+    display: inline-block;
+    background-color: #ffa500;
+    color: #121212;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #ff7f00;
+    color: #ffffff;
+}

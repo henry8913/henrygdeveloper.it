@@ -1,0 +1,112 @@
+/*______________________ Navbar ______________________*/
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: transparent;
+    padding: 0.5rem 0;
+    transition: max-height 0.3s ease; /* Transizione fluida */
+    overflow: hidden; /* Evita sovrapposizioni */
+    max-height: 60px; /* Altezza normale */
+}
+
+/* Navbar attiva */
+.navbar.active {
+    max-height: 400px; /* Altezza sufficiente per mostrare il menu */
+}
+
+/* Menu a tendina */
+.menu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    background-color: #1e1e1e;
+    padding: 1rem;
+    position: relative;
+    border-radius: 5px;
+    z-index: 100;
+    opacity: 0; /* Invisibile di default */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Mostra il menu quando attivo */
+.navbar.active .menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Link del menu */
+.menu li {
+    margin: 0.8rem 0;
+}
+
+.menu li a {
+    color: #ffa500;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ffa500;
+    border-radius: 5px;
+}
+
+.menu li a:hover {
+    background-color: #ffa500;
+    color: #121212;
+}
+
+/* Hamburger Button */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+}
+
+/* Stato normale del pulsante hamburger */
+.hamburger span {
+    display: block;
+    width: 30px;
+    height: 1px;
+    background-color: #ffa500;
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hamburger Aperto */
+.hamburger.open span:nth-child(1) {
+    transform-origin: center;
+    transform: rotate(45deg) translateY(6px);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform-origin: center;
+    transform: rotate(-45deg) translateY(-6px);
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    background-color: #1e1e1e;
+}
+
+/* Scritta della pagina corrente */
+#current-page {
+    font-size: 1.2rem;
+    color: #ffa500;
+}

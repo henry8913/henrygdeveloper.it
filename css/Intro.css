@@ -1,0 +1,19 @@
+/*______________________ Intro ______________________*/
+
+.project-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.project-preview article {
+    border: 1px solid #ffa500;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.project-preview article:hover {
+    background-color: #ffa500;
+    color: #121212;
+}

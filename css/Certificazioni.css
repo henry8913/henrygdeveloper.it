@@ -1,0 +1,39 @@
+/*______________________ Certificazioni ______________________*/
+
+.certifications h1 {
+    color: #f39c12;
+    font-size: 1.75rem;
+}
+
+.certifications p {
+    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+}
+
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.certification-card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #ffa500;
+}
+.certification-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+.certification-icon {
+    font-size: 3rem;
+    color: #f39c12;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+.certification-card:hover .certification-icon {
+    color: #e67e22;
+}

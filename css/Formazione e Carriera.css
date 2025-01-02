@@ -1,0 +1,56 @@
+/*______________________ Formazione e Carriera ______________________*/
+
+.education, .career {
+    background-color: #1e1e1e;
+    padding: 2rem 1rem;
+    border: 1px solid #ffa500;
+    border-radius: 10px;
+}
+
+.education {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin: auto;
+}
+
+.education h2, .career h2 {
+    color: #ffa500;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.education p, .career p {
+    margin: 1rem 0;
+}
+
+.education ul, .career ul {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+.education li, .career li {
+    margin: 0.5rem 0;
+    text-align: left;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.education li::before, .career li::before {
+    content: "•";
+    color: #ffa500;
+    position: absolute;
+    left: 0;
+}
+
+.current-page {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #ffa500; /* Colore arancione */
+}
+
+.project-preview {
+    margin-bottom: 0.8rem;
+}

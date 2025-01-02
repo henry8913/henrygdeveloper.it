@@ -1,0 +1,30 @@
+/*______________________ Sezioni ______________________*/
+
+section {
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.preview h2 {
+    color: #ffa500;
+}
+
+.intro h2, .skills h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.intro p {
+    margin: 0.5rem 0;
+    font-style: italic;
+}
+
+.skills ul {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.skills li {
+    margin: 0.5rem 0;
+}
