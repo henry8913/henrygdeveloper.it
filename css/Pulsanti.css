@@ -1,0 +1,28 @@
+/*______________________ Pulsanti ______________________*/
+
+.btn {
+    color: #aaaaaa;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.github {
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+.btn:hover {
+    background: #d35400;
+}

@@ -1,0 +1,21 @@
+/*______________________ Footer ______________________*/
+
+footer {
+    /*position: fixed;*/
+    bottom: 0;
+    width: 100%;
+    background-color: #292929;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+footer li {
+    color: #aaaaaa;
+    font-size: 0.7rem;
+    padding: 0.5rem 1rem;
+}
+
+footer h4 {
+    color: #ffa500;
+    margin-bottom: 2rem;
+}

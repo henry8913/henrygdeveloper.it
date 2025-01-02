@@ -1,0 +1,32 @@
+/*______________________ Header ______________________*/
+
+header, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
+header h1 {
+    text-align: center;
+}
+
+header img {
+    height: 4.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+/* Header */
+header {
+    margin: 0;
+    position: relative;
+    background-color: #1e1e1e;
+    transition: height 0.3s ease; /* Transizione fluida per l'espansione */
+    z-index: 1;
+    overflow: hidden; /* Evita che il contenuto esca */
+    padding: 1rem;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}

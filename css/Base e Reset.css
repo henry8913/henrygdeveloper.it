@@ -1,0 +1,27 @@
+/*______________________ Base e Reset ______________________*/
+
+* {
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* Stile Generale */
+body {
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+/* Tema Scuro */
+.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
