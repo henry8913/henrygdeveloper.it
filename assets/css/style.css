@@ -690,6 +690,7 @@ main {
   background: hsla(240, 1%, 17%, 0.75);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--jet);
+  border-radius: 0 0 20px 20px;
   box-shadow: var(--shadow-2);
   z-index: 4;
   max-height: 70px;
