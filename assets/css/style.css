@@ -255,7 +255,7 @@ article {
   --light-gray-70: hsla(0, 0%, 30%, 0.7);
 }
 
-  border: 1px solid var(--jet);
+.info_more-btn { border: 1px solid var(--jet);
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);
@@ -982,7 +982,6 @@ main {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: hsl(0, 0%, 5%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1187,7 +1186,6 @@ main {
 .timeline-details i {
   margin-right: 8px;
   color: var(--orange-yellow-crayola);
-}
 }
 
 .timeline-item::after {
