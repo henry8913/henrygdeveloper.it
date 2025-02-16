@@ -1,561 +1,1830 @@
+<!--
+Visita il progetto per esplorare le funzionalità e i dettagli. Se vuoi saperne di più, controlla il file README.md.
+-->
 
 <!DOCTYPE html>
-<html lang="it" class="dark">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Website Coming Soon</title>
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Website Coming Soon">
-    <meta property="og:description" content="Gioca a Snake mentre aspetti il lancio del sito!">
-    <meta property="og:image" content="img/cover.jpg">
-    <meta property="og:url" content="https://website-coming-soon.vercel.app/">
-    <meta property="og:type" content="website">
-    <!-- Canonical Link -->
-    <link rel="canonical" href="https://website-coming-soon.vercel.app/">
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Website Coming Soon">
-    <meta name="twitter:description" content="Gioca a Snake mentre aspetti il lancio del sito!">
-    <meta name="twitter:image" content="img/cover.jpg">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg" href="img/favicon_tr.svg">
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            content: ["./*.{html,js}"],
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#ff6b00',
-                    }
-                },
-            },
-            darkMode: 'class',
-        }
-    </script>
-    <style>
-        /* Base styles (Mobile First) */
-        body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            min-height: 100vh;
-            font-size: 14px;
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></> Henry G.</title>
 
-        .container {
-            width: 100%;
-            margin: 0 auto;
-            text-align: center;
-            padding: 10px;
-        }
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/images/my-avatar.png" type="image/x-icon">
 
-        h1 {
-            font-size: 1.8em;
-            margin: 15px 0;
-        }
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-        p {
-            font-size: 1em;
-            color: #cccccc;
-            margin: 10px 0;
-        }
-
-        #game-container {
-            margin-top: 15px;
-            padding: 0 10px;
-        }
-
-        #gameCanvas {
-            display: block;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-        }
-
-        #mobile-controls {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            max-width: 280px;
-            margin: 1rem auto;
-        }
-
-        .footer-section {
-            padding: 0.5rem;
-        }
-
-        /* Tablet (728px to 1028px) */
-        @media (min-width: 728px) {
-            body {
-                padding: 20px;
-                font-size: 16px;
-            }
-
-            .container {
-                max-width: 700px;
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2.2em;
-            }
-
-            p {
-                font-size: 1.1em;
-            }
-
-            #gameCanvas {
-                max-width: 350px;
-            }
-
-            #mobile-controls {
-                display: none;
-            }
-
-            .footer-section {
-                padding: 1rem;
-            }
-        }
-
-        /* Desktop (>1028px) */
-        @media (min-width: 1028px) {
-            body {
-                font-size: 18px;
-            }
-
-            .container {
-                max-width: 960px;
-                padding: 30px;
-            }
-
-            h1 {
-                font-size: 2.5em;
-            }
-
-            p {
-                font-size: 1.2em;
-            }
-
-            #gameCanvas {
-                max-width: 400px;
-            }
-
-            .footer-section {
-                padding: 1.5rem;
-            }
-        }
-
-        #game-status {
-            color: #ff0000;
-            font-size: 1.5em;
-            margin: 10px 0;
-            display: none;
-        }
-
-        #restart-btn {
-            background-color: green;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin: 10px 0;
-            display: none;
-        }
-
-        #restart-btn:hover {
-            background-color: #d01b1b;
-        }
-
-        .control-btn {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 107, 0, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            font-size: 24px;
-            touch-action: manipulation;
-        }
-
-        .control-btn:active {
-            background-color: rgba(255, 107, 0, 0.3);
-        }
-
-        .start-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 1.2em;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .start-btn:hover {
-            background-color: #45a049;
-        }
-
-        .footer-section {
-            padding: 1rem;
-        }
-
-        footer a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        footer input:focus {
-            outline: none;
-            border-color: #ff6b00;
-        }
-
-        @media (max-width: 768px) {
-            .footer-section {
-                padding: 0.5rem;
-            }
-        }
-    </style>
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white min-h-screen">    
-    <nav class="bg-gray-900/80 backdrop-blur-sm border-b border-gray-800 fixed w-full top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <img src="img/tr2.svg" alt="Logo" class="h-10 w-auto">
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-gray-300 hover:text-primary transition-colors">Home</a>
-                    <a href="#" class="text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="#" class="text-gray-300 hover:text-primary transition-colors">Contact</a>
-                    <button class="bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-lg transition-all hover:scale-105">
-                        Subscribe
-                    </button>
-                </div>
 
-                <!-- Mobile menu button -->
-                <button class="md:hidden text-gray-300 hover:text-primary mr-5" id="mobile-menu-button" aria-label="Menu">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
+<body>
 
-            <!-- Mobile menu (hidden by default) -->
-            <div class="md:hidden">
-                <div class="px-2 pt-2 pb-3 hidden bg-gray-900/95 backdrop-blur-sm rounded-lg border border-gray-800 mt-2 transition-all duration-300 ease-in-out" id="mobile-menu">
-                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-primary transition-colors text-left">Home</a>
-                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-primary transition-colors text-left">About</a>
-                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-primary transition-colors text-left">Contact</a>
-                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-primary transition-colors text-left">Services</a>
-                    <a href="#" class="block px-3 py-2 text-gray-300 hover:text-primary transition-colors text-left">Blog</a>
-                    <button class="w-full text-left bg-primary hover:bg-primary/80 text-white px-3 py-2 rounded-lg transition-colors mt-2">
-                        Subscribe
-                    </button>
-                </div>
-            </div>
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/my-avatar.png" alt="Richard hanrick" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Henry G. Developer">Henry G.</h1>
+
+          <p class="title">Full Stack Developer</p>
+
+          <div class="theme-switcher">
+            <button class="theme-btn active" data-theme="dark">
+              <ion-icon name="moon"></ion-icon>
+            </button>
+            <button class="theme-btn" data-theme="light">
+              <ion-icon name="sunny"></ion-icon>
+            </button>
+            <button class="theme-btn" data-theme="auto">
+              <ion-icon name="contrast"></ion-icon>
+            </button>
+          </div>
         </div>
-    </nav>
 
-    <div class="container mx-auto max-w-2xl px-4 pt-24">
-        <h1 class="text-4xl font-bold mb-4"> Website Coming Soon!</h1>
-        <p class="text-gray-300 text-lg mb-8">Stay tuned for something amazing! Riprova più tardi.</p>
-        
-        <h2 class="text-2xl font-bold mb-4">🎮 Gioca a snake mentre aspetti! 🐍</h2>
-        <div id="game-container" class="w-full">
-            <div id="game-status" class="text-red-500 text-xl my-4 hidden">Game Over!</div>
-            <div id="score-display" class="text-xl my-2">Score: 0 | High Score: 0</div>
-            <div id="level-display" class="text-lg my-2">Level: 1</div>
-            <button id="restart-btn" class="bg-primary hover:bg-primary/80 text-white px-6 py-2 rounded-lg mb-4 hidden">Restart</button>
-            <canvas id="gameCanvas" class="mx-auto border-2 border-primary bg-white"></canvas>
-            <div id="mobile-controls" class="mt-4">
-                <div></div>
-                <button class="control-btn" data-direction="up">⬆️</button>
-                <div></div>
-                <button class="control-btn" data-direction="left">⬅️</button>
-                <div></div>
-                <button class="control-btn" data-direction="right">➡️</button>
-                <div></div>
-                <button class="control-btn" data-direction="down">⬇️</button>
-                <div></div>
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
             </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:henry8913@hotmail.it" class="contact-link">henry8913@hotmail.it</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">WhatsApp</p>
+              <a href="https://wa.me/393926936916" class="contact-link">+39 392 693 6916</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">LinkedIn</p>
+              <a href="https://www.linkedin.com/in/henry-k-grecchi-555454254/" class="contact-link"
+                target="_blank">Henry G.</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">GitHub</p>
+              <a href="https://github.com/henry8913" class="contact-link" target="_blank">henry8913</a>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <div class="footer-text">
+          © 2024 Henry - Full-Stack Developer<br>
+          Questo sito non ha nessun tipo di tracciamento, non ci sono cookies e non vengono raccolti dati di nessun tipo.<br>
+          Il sito web è completamente open source, puoi trovare il codice sorgente <a href="https://github.com/henry8913/henrygdeveloper.com.git" target="_blank">qui</a>.<br>
+          Per informazioni e collaborazioni <a href="https://wa.me/393926936916" data-nav-link="contact">contattami</a>.
         </div>
+
+      </div>
+
+    </aside>
+
+    <!-- Mobile Menu Sidebar -->
+    <aside class="mobile-sidebar" data-mobile-sidebar>
+      <div class="mobile-header">
+        <img src="./assets/images/tr2.svg" alt="Logo" class="mobile-logo">
+        <button class="menu-button" data-menu-toggle>Menu</button>
+      </div>
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link active" data-nav-link>Home</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link" data-nav-link>About</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link" data-nav-link>Resume</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link" data-nav-link>Portfolio</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link" data-nav-link>Certifications</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link" data-nav-link>Contact</button>
+        </li>
+        <li class="mobile-nav-item">
+          <button class="mobile-nav-link" data-nav-link>Blog</button>
+        </li>
+      </ul>
+    </aside>
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>Home</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Certifications</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Blog</button>
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #HOME
+      -->
+
+      <article class="home active" data-page="home">
+        <header>
+          <h2 class="h2 article-title">Welcome</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            Benvenuto nel mio portfolio! Sono un Full-Stack Developer appassionato di tecnologia e innovazione, specializzato nello sviluppo di soluzioni web moderne ed efficienti.
+          </p>
+          <p>
+            Con una solida formazione tecnica e un'esperienza pratica in progetti reali, mi dedico a creare applicazioni web che uniscono funzionalità avanzate e design intuitivo.
+          </p>
+        </section>
+
+        <section class="service">
+          <h3 class="h3 service-title">Competenze Principali</h3>
+
+          <ul class="service-list">
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg" alt="design icon" width="40">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Frontend Development</h4>
+                <p class="service-item-text">
+                  Sviluppo interfacce responsive con HTML5, CSS3, JavaScript e React
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="backend icon" width="40">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Backend Development</h4>
+                <p class="service-item-text">
+                  Creazione di API RESTful con Node.js, Express e gestione database
+                </p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="timeline">
+          <div class="title-wrapper">
+            <h3 class="h3">Progetti in Evidenza</h3>
+          </div>
+
+          <ul class="timeline-list">
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">EPICBooks</h4>
+              <p class="timeline-text">
+                E-commerce di libri con API integration, sistema di ricerca avanzata e gestione carrello
+              </p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Pexels Clone</h4>
+              <p class="timeline-text">
+                Applicazione di ricerca immagini con integrazione API Pexels e interfaccia reattiva
+              </p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">ShushiDev</h4>
+              <p class="timeline-text">
+                Sistema di gestione ordini con interfaccia intuitiva e integrazione pagamenti
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="contact-info">
+          <h3 class="h3">Contatti Rapidi</h3>
+          <ul class="contacts-list">
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">Email</p>
+                <a href="mailto:henry8913@hotmail.it" class="contact-link">henry8913@hotmail.it</a>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">LinkedIn</p>
+                <a href="https://www.linkedin.com/in/henry-k-grecchi-555454254/" class="contact-link" target="_blank">Henry G.</a>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            Mi chiamo Henry e sono un Full-Stack Developer con una profonda passione per il mondo del coding e le
+            tecnologie emergenti.
+            La mia missione è creare soluzioni digitali che abbiano un impatto reale, combinando design e funzionalità
+            in modo armonioso.
+          </p>
+
+          <p>
+            Oltre alla mia esperienza tecnica, mi impegno a mantenere una mentalità aperta e creativa, esplorando nuove
+            tecnologie
+            e metodi di sviluppo per offrire soluzioni all'avanguardia.
+          </p>
+
+          <h3 class="h3">Il mio percorso</h3>
+          <p>
+            Il mio viaggio nel mondo dello sviluppo web è iniziato con una formazione intensiva che mi ha fornito una
+            solida base
+            nei linguaggi e strumenti essenziali. Durante il mio percorso, ho lavorato su progetti pratici che mi hanno
+            permesso
+            di applicare le mie conoscenze in contesti reali.
+          </p>
+          <p>
+            Questi progetti non solo mi hanno insegnato le migliori pratiche di sviluppo, ma mi hanno anche aiutato a
+            comprendere
+            l'importanza della collaborazione e della comunicazione efficace in un team.
+          </p>
+
+          <h3 class="h3">Competenze principali</h3>
+          <ul class="about-list">
+            <li><strong>Frontend:</strong> HTML, CSS, JavaScript (inclusi ES6+), React. Capacità di creare interfacce
+              utente moderne e responsive.</li>
+            <li><strong>Backend:</strong> Node.js, Express, gestione di database con MongoDB. Competenza nello sviluppo
+              di API scalabili e sicure.</li>
+            <li><strong>Version Control:</strong> Esperienza approfondita con Git e GitHub. Gestione efficiente del
+              codice in team.</li>
+            <li><strong>Metodologie di lavoro:</strong> Agile, collaborazione in team e sviluppo orientato al
+              problem-solving. Focus sull'adattabilità e sull'apprendimento continuo.</li>
+          </ul>
+
+          <h3 class="h3">I miei valori</h3>
+          <p>
+            Credo nell'importanza di apprendere continuamente e di condividere la conoscenza con gli altri. Mi piace
+            affrontare
+            le sfide con creatività e determinazione, cercando sempre di migliorare e di aiutare chi mi circonda a fare
+            lo stesso.
+          </p>
+          <p>
+            Per me, il successo si misura non solo nei risultati tecnici, ma anche nell'impatto positivo che le
+            soluzioni possono
+            avere sulle persone e sulle comunità.
+          </p>
+
+          <h3 class="h3">Alcuni fatti su di me</h3>
+          <ul class="about-list">
+            <li>Sono appassionato di intelligenza artificiale e sviluppo di applicazioni scalabili. Amo sperimentare con
+              nuove tecnologie e idee innovative.</li>
+            <li>Dedico parte del mio tempo libero a contribuire a progetti open-source, contribuendo attivamente alla
+              crescita della community.</li>
+            <li>Adoro leggere libri sulla programmazione e partecipare a hackathon per mettermi alla prova e collaborare
+              con altri sviluppatori.</li>
+            <li>Mi piace esplorare la natura e affrontare nuove sfide, trovando ispirazione sia nel mondo digitale che
+              in quello reale.</li>
+          </ul>
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">What i'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg
+                " alt="design icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web Development</h4>
+
+                <p class="service-item-text">
+                  Sviluppo siti web moderni e responsive utilizzando le più recenti tecnologie.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Full Stack Development</h4>
+
+                <p class="service-item-text">
+                  Sviluppo applicazioni web complete utilizzando tecnologie moderne come React, Node.js, e Python.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">API Development</h4>
+
+                <p class="service-item-text">
+                  Sviluppo di API RESTful e integrazione con servizi di terze parti.
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="development icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Database Design</h4>
+
+                <p class="service-item-text">
+                  Progettazione e ottimizzazione di database relazionali e NoSQL.
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - testimonials
+        -->
+
+        <section class="testimonials">
+
+          <h3 class="h3 testimonials-title">Testimonials</h3>
+
+          <ul class="testimonials-list has-scrollbar">
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-1.png" alt="Marco Rossi" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Marco R.</h4>
+                <time datetime="2024-06-20"></time>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Ho collaborato con Henry su un progetto web complesso. La sua competenza in React e Node.js è stata
+                    fondamentale
+                    per il successo del progetto. La sua capacità di risolvere problemi e la sua attenzione ai dettagli
+                    sono
+                    davvero impressionanti.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-2.png" alt="Laura Bianchi" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Laura B.</h4>
+                <time datetime="2024-09-15"></time>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Henry ha sviluppato il nostro sito web aziendale. Il suo approccio full-stack e la sua capacità di
+                    gestire sia il frontend che il backend hanno reso il processo molto efficiente. È sempre disponibile
+                    e professionale.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-3.png" alt="Alessandro Verdi" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Alessandra V.</h4>
+                <time datetime="2025-01-10"></time>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    La passione di Henry per le nuove tecnologie e la sua dedizione all'apprendimento continuo sono
+                    evidenti
+                    nel suo lavoro. Ha implementato soluzioni innovative utilizzando le ultime tecnologie, mantenendo
+                    sempre
+                    un'ottima comunicazione durante tutto il processo.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-4.png" alt="Sofia Marino" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Stefano M.</h4>
+                <time datetime="2025-05-20"></time>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Ho apprezzato molto il lavoro di Henry sul nostro progetto di e-commerce. La sua esperienza con
+                    database e API ha permesso di creare un'applicazione robusta e scalabile. È un sviluppatore
+                    talentuoso con un'ottima etica del lavoro.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="testimonials-item">
+              <div class="content-card" data-testimonials-item>
+
+                <figure class="testimonials-avatar-box">
+                  <img src="./assets/images/avatar-5.png" alt="Giulia Verdi" width="60" data-testimonials-avatar>
+                </figure>
+
+                <h4 class="h4 testimonials-item-title" data-testimonials-title>Giorgio V.</h4>
+                <time datetime="2025-03-15"></time>
+
+                <div class="testimonials-text" data-testimonials-text>
+                  <p>
+                    Henry ha dimostrato una grande competenza nello sviluppo della nostra piattaforma web. La sua
+                    capacità
+                    di tradurre le nostre esigenze in soluzioni tecniche efficaci è stata impressionante. Ottima
+                    comunicazione e risultati eccellenti.
+                  </p>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <!--
+          - testimonials modal
+        -->
+
+        <div class="modal-container" data-modal-container>
+
+          <div class="overlay" data-overlay></div>
+
+          <section class="testimonials-modal">
+
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+            <div class="modal-img-wrapper">
+              <figure class="modal-avatar-box">
+                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
+              </figure>
+
+              <img src="./assets/images/icon-quote.svg" alt="quote icon">
+            </div>
+
+            <div class="modal-content">
+
+              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
+
+              <time datetime="2024-07-15">15 July, 2024</time>
+
+              <div data-modal-text>
+                <p>
+                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
+                  lot of experience
+                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
+                  consectetur adipiscing
+                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
+                </p>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!--
+          - clients
+        -->
+
+        <section class="clients">
+
+          <h3 class="h3 clients-title">Clients</h3>
+
+          <ul class="clients-list has-scrollbar">
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-1-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-2-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-3-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-4-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-5-color.png" alt="client logo">
+              </a>
+            </li>
+
+            <li class="clients-item">
+              <a href="#">
+                <img src="./assets/images/logo-6-color.png" alt="client logo">
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Sviluppo Web</h4>
+              <span>2024 — Presente</span>
+              <p class="timeline-text">
+                Ho imparato a creare pagine web moderne, utilizzando HTML, CSS3, Bootstrap e Animazioni CSS.
+                Competenze acquisite nella creazione di interfacce responsive e design moderno.
+              </p>
+              <ul class="timeline-details">
+                <li><i class="fas fa-file-code"></i> HTML</li>
+                <li><i class="fab fa-css3-alt"></i> CSS3</li>
+                <li><i class="fab fa-bootstrap"></i> Bootstrap</li>
+                <li><i class="fas fa-paint-brush"></i> Animazioni CSS</li>
+              </ul>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Sviluppo di Web App</h4>
+              <span>2024 — Presente</span>
+              <p class="timeline-text">
+                Ho sviluppato applicazioni web, imparando i fondamenti di programmazione e gli strumenti essenziali.
+              </p>
+              <ul class="timeline-details">
+                <li><i class="fas fa-code"></i> Fondamenti di programmazione (variabili, condizioni, oggetti, cicli...)
+                </li>
+                <li><i class="fas fa-code-branch"></i> Gestione delle versioni con Git</li>
+                <li><i class="fab fa-js"></i> JavaScript e manipolazione del DOM</li>
+              </ul>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">JavaScript Avanzato</h4>
+              <span>2024 — Presente</span>
+              <p class="timeline-text">
+                Ho approfondito lo sviluppo con JavaScript, studiando concetti avanzati e pattern di programmazione.
+              </p>
+              <ul class="timeline-details">
+                <li><i class="fas fa-project-diagram"></i> Design Patterns</li>
+                <li><i class="fas fa-code"></i> ES6 e funzionalità avanzate</li>
+                <li><i class="fas fa-network-wired"></i> Ajax e Promises per interagire con API esterne</li>
+              </ul>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">ReactJS</h4>
+              <span>2024 — Presente</span>
+              <p class="timeline-text">
+                Ho imparato a utilizzare React per creare applicazioni scalabili e modulari.
+              </p>
+              <ul class="timeline-details">
+                <li><i class="fas fa-cubes"></i> Componenti e stato (state)</li>
+                <li><i class="fas fa-route"></i> Routing per SPA (Single Page Applications)</li>
+                <li><i class="fas fa-share-alt"></i> Gestione delle proprietà (props)</li>
+              </ul>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Back-end Development</h4>
+              <span>2024 — Presente</span>
+              <p class="timeline-text">
+                Ho acquisito competenze nello sviluppo backend e nella creazione di API RESTful.
+              </p>
+              <ul class="timeline-details">
+                <li><i class="fas fa-server"></i> Node.js e Express.js</li>
+                <li><i class="fas fa-database"></i> MongoDB e gestione database</li>
+                <li><i class="fas fa-shield-alt"></i> Sicurezza e autenticazione</li>
+                <li><i class="fas fa-code-branch"></i> Architettura REST e API</li>
+              </ul>
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Obiettivi Professionali</h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+              <p class="timeline-text">
+                Sviluppo di applicazioni web complete, dalla progettazione dell'interfaccia utente alla gestione del
+                backend.
+                Il mio lavoro unisce creatività e logica, permettendomi di creare esperienze digitali uniche e
+                funzionali.
+              </p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Visione e Missione</h4>
+              <p class="timeline-text">
+                La mia missione è utilizzare le mie competenze per creare soluzioni tecnologiche innovative che abbiano
+                un impatto reale,
+                migliorando la vita delle persone e contribuendo al progresso digitale.
+              </p>
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">Competenze Tecniche</h3>
+
+          <ul class="skills-list content-card">
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Frontend Development (HTML, CSS, JavaScript)</h5>
+                <data value="90">90%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 90%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">React e Sviluppo SPA</h5>
+                <data value="85">85%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Backend Development (Node.js, Express)</h5>
+                <data value="85">85%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Database Management (MongoDB)</h5>
+                <data value="80">80%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 80%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Version Control (Git)</h5>
+                <data value="85">85%</data>
+              </div>
+              <div class="skill-progress-bg">
+                <div class="skill-progress-fill" style="width: 85%;"></div>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <ul class="filter-list">
+
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web design</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Applications</button>
+            </li>
+
+            <li class="filter-item">
+              <button data-filter-btn>Web development</button>
+            </li>
+
+          </ul>
+
+          <div class="filter-select-box">
+
+            <button class="filter-select" data-select>
+
+              <div class="select-value" data-selecct-value>Select category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+
+            </button>
+
+            <ul class="select-list">
+
+              <li class="select-item">
+                <button data-select-item>All</button>              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web design</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Applications</button>
+              </li>
+
+              <li class="select-item">
+                <button data-select-item>Web development</button>
+              </li>
+
+            </ul>
+
+          </div>
+
+          <ul class="project-list">
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="https://4-java-script-advanced-ch-3.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img
+                    src="https://raw.githubusercontent.com/henry8913/4_JavaScript-Advanced-CH3/refs/heads/main/img/cover_b.jpg"
+                    alt="JavaScript Advanced CH3" loading="lazy">
+                </figure>
+                <h3 class="project-title">Pexels Clone</h3>
+                <p class="project-category">Web Development</p>
+                <p class="project-description">Applicazione web per la ricerca di immagini con integrazione API di Pexels. Include gestione asincrona delle richieste, visualizzazione dinamica dei risultati e interfaccia reattiva.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/4_JavaScript-Advanced-CH3" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web design">
+              <a href="https://3-web-design-ch-6.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/3_Web-Design-CH6/refs/heads/main/img/cover.gif" alt="Web Design CH6"
+                    loading="lazy">
+                </figure>
+                <h3 class="project-title">TechAcademy</h3>
+                <p class="project-category">Web Design</p>
+                <p class="project-description">Progetto di design web avanzato focalizzato su tecniche CSS moderne, includendo Flexbox, Grid e animazioni personalizzate per creare layout responsive e interattivi.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/3_Web-Design-CH6" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web design">
+              <a href="https://travel-agency-indol-eight.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/3_Web-Design-CH4/refs/heads/main/img/cover.png" alt="Web Design CH4"
+                    loading="lazy">
+                </figure>
+                <h3 class="project-title">Soléa</h3>
+                <p class="project-category">Web Design</p>
+                <p class="project-description">Soléa è un sito innovativo che ti guida nella scoperta di mete da sogno, offrendo un design attraente e un'interfaccia intuitiva,  ottimizzato per tutti i dispositivi.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/3_Web-Design-CH4" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web design">
+              <a href="https://3-web-design-ch-3.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/3_Web-Design-CH3/refs/heads/main/img/cover.jpg" alt="Web Design CH3"
+                    loading="lazy">
+                </figure>
+                <h3 class="project-title">Henry Music</h3>
+                <p class="project-category">Web Design</p>
+                <p class="project-description">Studio pratico di pattern di design responsivo utilizzando CSS moderno. Focus su media queries, unità relative e best practices per la manutenibilità del codice.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/3_Web-Design-CH3" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web design">
+              <a href="https://website-coming-soon-rho.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/Website-Coming-Soon/refs/heads/main/img/cover.jpg" alt="Coming Soon Page"
+                    loading="lazy">
+                </figure>
+                <h3 class="project-title">Coming Soon Landing Page</h3>
+                <p class="project-category">Web Design</p>
+                <p class="project-description">Questo progetto è stato creato per intrattenere gli utenti mentre aspettano il ritorno online del sito principale. Nel frattempo, hanno la possibilità di giocare a Snake.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/Website-Coming-Soon" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="applications">
+              <a href="https://github.com/henry8913/Acrylic-Spider.py" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/Acrylic-Spider.py/refs/heads/main/spider.jpg" alt="Acrylic Spider"
+                    loading="lazy">
+                </figure>
+                <h3 class="project-title">Acrylic Spider</h3>
+                <p class="project-category">Applications</p>
+                <p class="project-description">Progetto open-source che gestisce un robot ragno in acrilico, equipaggiato con servomotori, sensori e un mini PC Raspberry Pi. Grazie alla sua struttura modulare consente esplorazioni efficaci.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/Acrylic-Spider.py" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="https://rest-api-test-and-ui.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/REST-API-Test-and-UI/refs/heads/main/img/cover.jpg"
+                    alt="REST API Test and UI" loading="lazy">
+                </figure>
+                <h3 class="project-title">REST API Test and UI</h3>
+                <p class="project-category">Web Development</p>
+                <p class="project-description">Suite di test per API REST con interfaccia utente integrata. Strumento per testare endpoints e visualizzare risposte in tempo reale.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/REST-API-Test-and-UI" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web development">
+              <a href="https://4-java-script-advanced-ch-4.vercel.app/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/4_JavaScript-Advanced-CH4/refs/heads/main/img/cover.b.jpg"
+                    alt="JavaScript Advanced CH4" loading="lazy">
+                </figure>
+                <h3 class="project-title">EPICBooks</h3>
+                <p class="project-category">Web Development</p>
+                <p class="project-description">E-commerce di Libri Online: sfrutta le API e offre funzionalità come ricerca avanzata, gestione del carrello, sistema di pagamento e un design reattivo.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/4_JavaScript-Advanced-CH4" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="applications">
+              <a href="https://shushidev.onrender.com/" target="_blank">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+                  <img src="https://raw.githubusercontent.com/henry8913/ShushiDev/refs/heads/main/rolls/static/rolls/cover.jpg" alt="ShushiDev" loading="lazy">
+                </figure>
+                <h3 class="project-title">ShushiDev</h3>
+                <p class="project-category">Applications</p>
+                <p class="project-description">Applicazione per la gestione di ordini di sushi con interfaccia intuitiva. Include sistema di carrello, gestione ordini e integrazione pagamenti.</p>
+                <div class="github-link">
+                  <ion-icon name="logo-github"></ion-icon>
+                  <a href="https://github.com/henry8913/ShushiDev" target="_blank">Repository GitHub</a>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #BLOG
+      -->
+
+      <article class="blog" data-page="certifications">
+
+        <header>
+          <h2 class="h2 article-title">Certifications</h2>
+        </header>
+
+        <section class="blog-posts">
+
+          <ul class="blog-posts-list">
+
+            <li class="blog-post-item">
+              <div>
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97"
+                    alt="Full Stack Developer Certificate" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Full Stack Developer</h3>
+                  <p class="blog-text">
+                    Sviluppo di applicazioni web moderne e scalabili attraverso vari linguaggi e tecnologie.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c" alt="Module 6 Certificate"
+                    loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Backend Development & APIs</h3>
+                  <p class="blog-text">
+                    Node.js, Express, MongoDB, e sviluppo di API RESTful
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee" alt="Module 5 Certificate"
+                    loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">React Development</h3>
+                  <p class="blog-text">
+                    Sviluppo frontend avanzato con React, Redux e gestione dello stato
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a" alt="Module 4 Certificate"
+                    loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Advanced JavaScript</h3>
+                  <p class="blog-text">
+                    JavaScript ES6+, programmazione asincrona e pattern avanzati
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479" alt="Module 3 Certificate"
+                    loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">JavaScript Fundamentals</h3>
+                  <p class="blog-text">
+                    Fondamenti di JavaScript e manipolazione del DOM
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1621839673705-6617adf9e890" alt="Module 2 Certificate"
+                    loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">CSS & Bootstrap</h3>
+                  <p class="blog-text">
+                    Styling avanzato con CSS3 e framework Bootstrap
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713" alt="Module 1 Certificate"
+                    loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Web Developer</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">HTML & Web Basics</h3>
+                  <p class="blog-text">
+                    Fondamenti di HTML5 e struttura delle pagine web
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1614294148960-9aa740632a87" alt="Tech Camp Gaming Certificate" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Game Development</p>
+                    <span class="dot"></span>
+                    <time datetime="2024">2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Unity & Character Creation</h3>
+                  <p class="blog-text">
+                    Sviluppo di videogiochi con Unity e Visual Studio, focus sulla creazione di personaggi
+                  </p>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article class="contact" data-page="contact">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <p class="contact-text">
+          Hai domande, proposte di collaborazione o semplicemente vuoi salutarmi? Sono sempre felice di sentire nuove
+          idee
+          e connettermi con persone interessate alla tecnologia e allo sviluppo web.
+        </p>
+
+        <section class="contact-info">
+          <h3 class="h3">Dove trovarmi</h3>
+
+          <ul class="contacts-list">
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">Email</p>
+                <a href="mailto:henry8913@hotmail.it" class="contact-link">henry8913@hotmail.it</a>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">WhatsApp</p>
+                <a href="https://wa.me/393926936916" class="contact-link" target="_blank">+39 392 693 6916</a>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">LinkedIn</p>
+                <a href="https://www.linkedin.com/in/henry-k-grecchi-555454254/" class="contact-link"
+                  target="_blank">Henry G.</a>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="logo-github"></ion-icon>
+              </div>
+              <div class="contact-info">
+                <p class="contact-title">GitHub</p>
+                <a href="https://github.com/henry8913" class="contact-link" target="_blank">henry8913</a>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="contact-form">
+          <h3 class="h3 form-title">Inviami un messaggio</h3>
+
+          <form action="https://formspree.io/f/mpwwpgzr" method="POST" class="form" data-form>
+            <div class="input-wrapper">
+              <input type="text" name="name" class="form-input" placeholder="Il tuo nome" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="La tua email" required data-form-input>
+            </div>
+
+            <textarea name="message" class="form-input" placeholder="Scrivi il tuo messaggio qui" required
+              data-form-input></textarea>
+
+            <button class="form-btn" type="submit">
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Invia Messaggio</span>
+            </button>
+          </form>
+
+          <p id="success-message" style="display: none; color: var(--orange-yellow-crayola);">
+            <ion-icon name="checkmark-circle"></ion-icon> Messaggio inviato con successo! Ti risponderò al più presto.
+          </p>
+          <p id="error-message" style="display: none; color: var(--bittersweet-shimmer);">
+            <ion-icon name="alert-circle"></ion-icon> Si è verificato un errore. Riprova più tardi.
+          </p>
+        </section>
+
+      </article>
+
+      <!--
+        - #BLOG
+      -->
+
+      <article class="blog" data-page="blog">
+
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+        </header>
+
+        <section class="blog-posts">
+          <ul class="blog-posts-list">
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1550439062-609e1531270e" alt="Web Components" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Frontend Development</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-06-15">15 Giu 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Il Futuro dei Web Components</h3>
+                  <p class="blog-text">
+                    Come i Web Components stanno rivoluzionando lo sviluppo di interfacce web moderne e riutilizzabili.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5" alt="Cybersecurity" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Security</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-05-10">10 Mag 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Cybersecurity nel Web3</h3>
+                  <p class="blog-text">
+                    Nuove sfide e soluzioni per la sicurezza nell'era del Web3 e delle applicazioni decentralizzate.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1623282033815-40b05d96c903" alt="Edge Computing" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Infrastructure</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-04-20">20 Apr 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Edge Computing e PWA</h3>
+                  <p class="blog-text">
+                    Come l'Edge Computing sta trasformando le Progressive Web Apps e migliorando l'esperienza utente.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81" alt="Serverless" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Cloud Computing</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-03-15">15 Mar 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Architetture Serverless</h3>
+                  <p class="blog-text">
+                    Vantaggi e sfide nell'implementazione di architetture serverless per applicazioni moderne.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2" alt="State Management" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Frontend</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-02-10">10 Feb 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Gestione Stato Moderna</h3>
+                  <p class="blog-text">
+                    Analisi delle moderne soluzioni di state management: Redux Toolkit, Zustand, Jotai e XState a confronto.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3" alt="Performance" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Performance</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-01-20">20 Gen 2025</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Core Web Vitals</h3>
+                  <p class="blog-text">
+                    Ottimizzare le metriche Core Web Vitals per migliorare SEO e user experience delle applicazioni web.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479" alt="Testing" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Testing</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-12-15">15 Dic 2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Testing E2E Moderno</h3>
+                  <p class="blog-text">
+                    Best practices per il testing end-to-end con Cypress e Playwright nelle applicazioni web moderne.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="DevOps" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">DevOps</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-11-05">5 Nov 2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">CI/CD per Web Apps</h3>
+                  <p class="blog-text">
+                    Implementare pipeline di continuous integration e deployment per applicazioni web scalabili.
+                  </p>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+        </section>
+
+      </article>
+
     </div>
 
-    <footer class="mt-16 border-t border-gray-800 py-8 px-4">
-        <div class="container mx-auto max-w-7xl">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- About Section -->
-                <div class="footer-section text-center sm:text-left">
-                    <h3 class="text-primary font-bold text-lg sm:text-xl mb-4">About Us</h3>
-                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                        Enjoy our interactive Snake game while we prepare something amazing for you.
-                    </p>
-                </div>
-                
-                <!-- Quick Links -->
-                <div class="footer-section text-center sm:text-left">
-                    <h3 class="text-primary font-bold text-lg sm:text-xl mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm sm:text-base">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm sm:text-base">About</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm sm:text-base">Contact</a></li>
-                    </ul>
-                </div>
+    <!-- Blog Modals -->
+    <div class="modal-container blog-modal-container" data-blog-modal-container>
+      <div class="overlay" data-blog-overlay></div>
 
-                <!-- Social Links -->
-                <div class="footer-section text-center sm:text-left">
-                    <h3 class="text-primary font-bold text-lg sm:text-xl mb-4">Connect With Us</h3>
-                    <div class="flex justify-center sm:justify-start space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors group">
-                            <i class="fab fa-github text-xl sm:text-2xl group-hover:scale-110 transition-transform"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors group">
-                            <i class="fab fa-linkedin text-xl sm:text-2xl group-hover:scale-110 transition-transform"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary transition-colors group">
-                            <i class="fab fa-twitter text-xl sm:text-2xl group-hover:scale-110 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
+      <section class="blog-modal">
+        <button class="modal-close-btn" data-blog-modal-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
 
-                <!-- Newsletter -->
-                <div class="footer-section text-center sm:text-left">
-                    <h3 class="text-primary font-bold text-lg sm:text-xl mb-4">Stay Updated</h3>
-                    <form class="flex flex-col space-y-3 max-w-xs mx-auto sm:mx-0">
-                        <input 
-                            type="email" 
-                            placeholder="Your email address" 
-                            class="px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:border-primary text-sm sm:text-base"
-                        >
-                        <button 
-                            type="submit" 
-                            class="bg-primary hover:bg-primary/80 text-white px-6 py-2 rounded-lg transition-all hover:scale-105 text-sm sm:text-base"
-                        >
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
+        <div class="blog-modal-content">
+          <figure class="blog-modal-img">
+            <img src="" alt="" data-blog-modal-img>
+          </figure>
+
+          <div class="blog-modal-text">
+            <h3 class="h3 blog-modal-title" data-blog-modal-title></h3>
+
+            <div class="blog-meta">
+              <p class="blog-category" data-blog-modal-category></p>
+              <span class="dot"></span>
+              <time datetime="" data-blog-modal-date></time>
             </div>
 
-            <!-- Copyright -->
-            <div class="pt-8 border-t border-gray-800 text-center">
-                <p class="text-gray-400 text-sm sm:text-base">&copy; 2024 Website Coming Soon. All rights reserved.</p>
+            <div class="blog-modal-body" data-blog-modal-body>
+              <!-- AI Content -->
+              <div data-modal-ai>
+                <h4>Il Ruolo dell'AI nello Sviluppo Web</h4>
+                <p>L'intelligenza artificiale sta rivoluzionando il modo in cui sviluppiamo applicazioni web. Dall'automazione del testing alla generazione di codice, l'AI sta diventando uno strumento indispensabile per gli sviluppatori moderni.</p>
+                <p>Principali applicazioni:</p>
+                <ul>
+                  <li>Generazione automatica di codice</li>
+                  <li>Ottimizzazione delle performance</li>
+                  <li>Testing automatizzato</li>
+                  <li>Personalizzazione dell'esperienza utente</li>
+                </ul>
+              </div>
+
+              <!-- Cloud Content -->
+              <div data-modal-cloud>
+                <h4>Architetture Cloud Native</h4>
+                <p>Le architetture cloud native rappresentano un approccio moderno allo sviluppo di applicazioni che sfruttano appieno i vantaggi del cloud computing.</p>
+                <p>Componenti chiave:</p>
+                <ul>
+                  <li>Microservizi e container</li>
+                  <li>Orchestrazione con Kubernetes</li>
+                  <li>Scalabilità automatica</li>
+                  <li>Resilienza e alta disponibilità</li>
+                </ul>
+              </div>
+
+              <!-- Mobile Content -->
+              <div data-modal-mobile>
+                <h4>React Native nel 2025</h4>
+                <p>React Native continua a evolversi come framework di riferimento per lo sviluppo mobile cross-platform, introducendo nuove funzionalità e miglioramenti.</p>
+                <p>Novità principali:</p>
+                <ul>
+                  <li>Nuova architettura e bridge</li>
+                  <li>Miglior supporto per gesture e animazioni</li>
+                  <li>Integrazione con API native avanzate</li>
+                  <li>Ottimizzazioni delle performance</li>
+                </ul>
+              </div>
+
+              <!-- Performance Content -->
+              <div data-modal-performance>
+                <h4>Ottimizzazione Web Performance</h4>
+                <p>La performance è un aspetto cruciale per il successo di qualsiasi applicazione web moderna. Tecniche e strumenti avanzati permettono di ottenere risultati eccellenti.</p>
+                <p>Strategie chiave:</p>
+                <ul>
+                  <li>Lazy loading e code splitting</li>
+                  <li>Ottimizzazione delle immagini</li>
+                  <li>Caching avanzato</li>
+                  <li>Server-side rendering</li>
+                </ul>
+              </div>
+
+              <!-- Testing Content -->
+              <div data-modal-testing>
+                <h4>Testing Automation</h4>
+                <p>L'automazione dei test è fondamentale per garantire la qualità del software e velocizzare il processo di sviluppo.</p>
+                <p>Aspetti principali:</p>
+                <ul>
+                  <li>Test unitari automatizzati</li>
+                  <li>Integration testing</li>
+                  <li>E2E testing con Cypress</li>
+                  <li>Performance testing</li>
+                </ul>
+              </div>
+
+              <!-- Frontend Content -->
+              <div data-modal-frontend>
+                <h4>Modern State Management</h4>
+                <p>La gestione dello stato nelle applicazioni frontend moderne richiede approcci sofisticati per gestire la complessità crescente.</p>
+                <p>Soluzioni moderne:</p>
+                <ul>
+                  <li>Redux Toolkit</li>
+                  <li>Zustand</li>
+                  <li>Jotai</li>
+                  <li>XState</li>
+                </ul>
+              </div>
+
+              <!-- Clean Code Content -->
+              <div data-modal-clean-code>
+                <h4>Clean Code: I Principi Fondamentali</h4>
+                <p>Il codice pulito è la base per progetti di successo e manutenibili nel lungo termine. Seguire le best practices di clean code è essenziale per ogni sviluppatore professionista.</p>
+                <p>Principi chiave:</p>
+                <ul>
+                  <li>Single Responsibility Principle</li>
+                  <li>DRY (Don't Repeat Yourself)</li>
+                  <li>KISS (Keep It Simple, Stupid)</li>
+                  <li>Meaningful Names e Commenti appropriati</li>
+                  <li>Test-Driven Development</li>
+                </ul>
+                <p>Vantaggi dell'approccio clean code:</p>
+                <ul>
+                  <li>Maggiore manutenibilità del codice</li>
+                  <li>Facilità di collaborazione in team</li>
+                  <li>Riduzione dei bug e dei debiti tecnici</li>
+                  <li>Migliore scalabilità del progetto</li>
+                </ul>
+              </div>
+
+              <!-- Security Content -->
+              <div data-modal-security>
+                <h4>Sicurezza nelle Web App Moderne</h4>
+                <p>La sicurezza è un aspetto cruciale nello sviluppo di applicazioni web moderne. Implementare le corrette misure di sicurezza è fondamentale per proteggere dati e utenti.</p>
+                <p>Best practices di sicurezza:</p>
+                <ul>
+                  <li>Autenticazione e autorizzazione robuste</li>
+                  <li>Protezione contro XSS e CSRF</li>
+                  <li>Gestione sicura delle sessioni</li>
+                  <li>Sanitizzazione degli input</li>
+                  <li>HTTPS e SSL/TLS</li>
+                </ul>
+                <p>Strumenti e tecniche:</p>
+                <ul>
+                  <li>Security Headers moderni</li>
+                  <li>OAuth 2.0 e JWT</li>
+                  <li>WAF (Web Application Firewall)</li>
+                  <li>Penetration Testing regolare</li>
+                </ul>
+              </div>
+
+              <!-- Database Content -->
+              <div data-modal-database>
+                <h4>NoSQL vs SQL nel 2025</h4>
+                <p>La scelta tra database SQL e NoSQL rimane una decisione cruciale nell'architettura delle applicazioni moderne. Ogni approccio ha i suoi punti di forza specifici.</p>
+                <p>Confronto dettagliato:</p>
+                <ul>
+                  <li>Struttura dei dati e schema</li>
+                  <li>Scalabilità e performance</li>
+                  <li>Consistenza e disponibilità</li>
+                  <li>Casi d'uso ideali</li>
+                </ul>
+                <p>Criteri di scelta:</p>
+                <ul>
+                  <li>Tipo e struttura dei dati</li>
+                  <li>Requisiti di scalabilità</li>
+                  <li>Consistenza dei dati necessaria</li>
+                  <li>Budget e risorse disponibili</li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      </section>
+    </div>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-        
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                isMenuOpen = !isMenuOpen;
-                mobileMenu.classList.toggle('hidden');
-                // Update icon
-                const icon = mobileMenuButton.querySelector('i');
-                icon.classList.remove(isMenuOpen ? 'fa-bars' : 'fa-times');
-                icon.classList.add(isMenuOpen ? 'fa-times' : 'fa-bars');
-            });
+  </main>
 
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                    isMenuOpen = false;
-                    const icon = mobileMenuButton.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-        }
 
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const gameStatus = document.getElementById('game-status');
-        const restartBtn = document.getElementById('restart-btn');
-        const scoreDisplay = document.getElementById('score-display');
-        const levelDisplay = document.getElementById('level-display');
 
-        canvas.width = 400;
-        canvas.height = 400;
-        const gridSize = 20;
 
-        let snake = [{ x: 10, y: 10 }];
-        let food = { x: 15, y: 15 };
-        let direction = 'right';
-        let gameLoop;
-        let score = 0;
-        let level = 1;
-        let speed = 175;
-        let highScore = localStorage.getItem('snakeHighScore') || 0;
 
-        const snakeColors = ['#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107'];
 
-        function drawSnake() {
-            snake.forEach((segment, index) => {
-                ctx.fillStyle = snakeColors[index % snakeColors.length];
-                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
-            });
-        }
+  <!--
+    - custom js link
+  -->
+  <div id="particles-js"></div>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="./assets/js/script.js"></script>
 
-        function drawFood() {
-            ctx.fillStyle = '#FF5252';
-            ctx.beginPath();
-            const centerX = (food.x * gridSize) + (gridSize / 2);
-            const centerY = (food.y * gridSize) + (gridSize / 2);
-            ctx.arc(centerX, centerY, gridSize / 2 - 2, 0, Math.PI * 2);
-            ctx.fill();
-        }
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        function updateScore() {
-            scoreDisplay.textContent = `Score: ${score} | High Score: ${highScore}`;
-            levelDisplay.textContent = `Level: ${level}`;
-        }
-
-        function updateDifficulty() {
-            if (score > 0 && score % 5 === 0) {
-                level = Math.floor(score / 5) + 1;
-                speed = Math.max(50, 175 - (level - 1) * 20);
-                clearInterval(gameLoop);
-                startGameLoop();
-            }
-        }
-
-        function moveSnake() {
-            const head = { ...snake[0] };
-
-            switch (direction) {
-                case 'up': head.y--; break;
-                case 'down': head.y++; break;
-                case 'left': head.x--; break;
-                case 'right': head.x++; break;
-            }
-
-            if (head.x < 0 || head.x >= canvas.width / gridSize ||
-                head.y < 0 || head.y >= canvas.height / gridSize ||
-                snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-                gameOver();
-                return;
-            }
-
-            snake.unshift(head);
-
-            if (head.x === food.x && head.y === food.y) {
-                generateFood();
-                score++;
-                if (score > highScore) {
-                    highScore = score;
-                    localStorage.setItem('snakeHighScore', highScore);
-                }
-                updateScore();
-                updateDifficulty();
-            } else {
-                snake.pop();
-            }
-        }
-
-        function generateFood() {
-            food = {
-                x: Math.floor(Math.random() * (canvas.width / gridSize)),
-                y: Math.floor(Math.random() * (canvas.height / gridSize))
-            };
-            if (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
-                generateFood();
-            }
-        }
-
-        function gameOver() {
-            clearInterval(gameLoop);
-            gameStatus.style.display = 'block';
-            restartBtn.style.display = 'inline-block';
-        }
-
-        function startGameLoop() {
-            gameLoop = setInterval(() => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                moveSnake();
-                drawFood();
-                drawSnake();
-            }, speed);
-        }
-
-        function startGame() {
-            snake = [{ x: 10, y: 10 }];
-            direction = 'right';
-            score = 0;
-            level = 1;
-            speed = 175;
-            generateFood();
-            gameStatus.style.display = 'none';
-            restartBtn.style.display = 'none';
-            updateScore();
-            if (gameLoop) clearInterval(gameLoop);
-            startGameLoop();
-        }
-
-        function handleDirectionChange(newDirection) {
-            switch (newDirection) {
-                case 'up': if (direction !== 'down') direction = 'up'; break;
-                case 'down': if (direction !== 'up') direction = 'down'; break;
-                case 'left': if (direction !== 'right') direction = 'left'; break;
-                case 'right': if (direction !== 'left') direction = 'right'; break;
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            switch (e.key) {
-                case 'ArrowUp': handleDirectionChange('up'); break;
-                case 'ArrowDown': handleDirectionChange('down'); break;
-                case 'ArrowLeft': handleDirectionChange('left'); break;
-                case 'ArrowRight': handleDirectionChange('right'); break;
-            }
-        });
-
-        document.querySelectorAll('.control-btn').forEach(btn => {
-            btn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                handleDirectionChange(btn.dataset.direction);
-            });
-        });
-
-        function preventScroll(e) {
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
-                e.preventDefault();
-            }
-        }
-
-        window.addEventListener('keydown', preventScroll);
-
-        const startBtn = document.createElement('button');
-        startBtn.textContent = 'Start Game';
-        startBtn.className = 'start-btn';
-        startBtn.style.position = 'absolute';
-        startBtn.style.left = '50%';
-        startBtn.style.top = '50%';
-        startBtn.style.transform = 'translate(-50%, -50%)';
-        canvas.parentElement.style.position = 'relative';
-        canvas.parentElement.appendChild(startBtn);
-
-        startBtn.addEventListener('click', () => {
-            startBtn.style.display = 'none';
-            startGame();
-        });
-
-        restartBtn.addEventListener('click', () => {
-            startBtn.style.display = 'none';
-            startGame();
-        });
-    </script>
 </body>
+
 </html>
